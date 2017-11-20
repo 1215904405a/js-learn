@@ -6,3 +6,5 @@ var a = [1,2,3];a.push.apply(a,[4,5,6]);console.log(a); // [1, 2, 3, 4, 5, 6] �
 
 obj.method.bind(this,data);  //获取引用this，不会执行， 只是返回函数  参数与call相同
 var a = [1,2,3];a.push.bind(a,[4,5,6])();console.log(a); // [1, 2, 3, Array(3)]
+
+Object.prototype.hasOwnProperty.call(source, key);//为什么这么调用 因为不确定source继承了object
