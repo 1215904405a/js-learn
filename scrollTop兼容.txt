@@ -1,0 +1,26 @@
+document.documentElement和document.body的区别
+页面具有 DTD，或者说指定了 DOCTYPE 时，使用 document.documentElement。
+
+页面不具有 DTD，或者说没有指定了 DOCTYPE，时，使用 document.body。
+
+var scrollTop = window.pageYOffset  //用于FF
+                || document.documentElement.scrollTop  
+                || document.body.scrollTop  
+                || 0;
+                
+DOM把层次中的每一个对象都称之为节点，就是一个层次结构，你可以理解为一个树形结构，就像我们的目录一样，一个根目录，根目录下有子目录，子目录下还有子目录。
+
+以HTML超文本标记语言为例：整个文档的一个根就是,在DOM中可以使用document.documentElement来访问它，它就是整个节点树的根节点。而body是子节点，要访问到body标签，在脚本中应该写：document.body。
+
+
+
+
+ 在设计页面时可能经常会用到固定层的位置，这就需要获取一些html对象的坐标以更灵活的设置目标层的坐标，这里可能就会用到document.body.scrollTop等属性，但是此属性在xhtml标准网页或者更简单的说是带<!DOCTYPE ..>标签的页面里得到的结果是0，如果不要此标签则一切正常，那么在xhtml页面怎么获得body的坐标呢，当然有办法-使用document.documentElement来取代document.body,可以这样写
+例：
+var top = document.documentElement.scrollTop || document.body.scrollTop;
+      在javascript里||是个好东西，除了能用在if等条件判断里，还能用在变量赋值上。那么上例等同于下例。
+例：
+var top = document.documentElement.scrollTop ? document.documentElement.scrollTop : document.body.scrollTop;
+这么写可以得到很好的兼容性。
+
+       相反，如果不做声明的话，document.documentElement.scrollTop反而会显示为0。
