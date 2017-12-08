@@ -24,3 +24,30 @@ function clone(obj){
 }
 
 Object.getOwnPropertyNames(Object);//获取不可枚举属性
+
+
+//数组clone
+let arr = [{
+  'obj1': 1
+}, {
+  'obj2': 2
+}];
+
+// 1
+const arr2 = arr.slice();
+console.log(arr2);
+
+// 2
+const arr3 = [].concat(arr);
+console.log(arr3);
+
+// 3
+// or use the new ES6 Spread
+const arr4 = [...arr];
+console.log(arr4);
+
+// 4
+const arr5 = Array.from(arr);
+console.log(arr5);
+//5
+var clone = JSON.parse(JSON.stringify(arr));
