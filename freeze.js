@@ -93,6 +93,8 @@
   // 相当于function B(){this.a=1;this.b=2;}）
   // Object.keys方法  不包括继承 es6扩展Object.values和Object.entries
   // JSON.stringify方法 不包括继承
+  // Object.getOwnPropertyNames()方法返回一个由指定对象的所有自身属性的属性名（包括不可枚举属性但不包括Symbol值作为名称的属性）组成的数组。
+  
   // test = Object.create({b:2},{
   //     "a":{
   //         value : 1,
