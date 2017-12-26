@@ -1,0 +1,6 @@
+var o = new Object();
+o.__proto__ = A.prototype;//这里还记得之那个function里面的默认的属性么?
+A.call(o)//由于这里this是指向o,可以把什么this.name/getName绑定到o上.
+把这个o返回给a;//完成var a = new A()的过程.
+
+注意： new 函数默认返回this自身     直接执行函数返回undifined
