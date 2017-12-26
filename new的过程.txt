@@ -4,3 +4,5 @@ A.call(o)//由于这里this是指向o,可以把什么this.name/getName绑定到o
 把这个o返回给a;//完成var a = new A()的过程.
 
 注意： new 函数默认返回this自身     直接执行函数返回undifined
+
+所有函数都有prototype，每个函数的实例__ptoto__ 公用一个索引prototype
