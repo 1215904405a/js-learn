@@ -1,0 +1,36 @@
+
+<--  goole事件流 先捕获后冒泡  -->
+<!DOCTYPE html>
+<html>
+<head>
+<title>preventDefault example</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+</head>
+<body>
+<div id="one">
+    one<br />
+    <div id="two">
+        two<br />
+        <div id="three">three</div>
+    </div>
+</div>
+<script type="text/javascript">
+  var one = document.getElementById("one");
+  var two = document.getElementById("two");
+  var three = document.getElementById("three");
+
+  one.addEventListener('click',function(e){
+      console.log('one');
+  },true); //true 捕获阶段触发事件回调
+
+  two.addEventListener('click',function(e){
+      console.log('two');
+  },false);//false 冒泡阶段触发事件回调
+
+  three.addEventListener('click',function(e){
+      console.log('three');
+  },false);
+</script>
+</body>
+</html>
