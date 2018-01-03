@@ -1,0 +1,36 @@
+因为bind 方法是EMS5 以后提出的方法，对于老的浏览器，可以使用手写一个bind 方法
+
+if(!Function.prototype.bind){
+
+　　Function.prototype.bind = function(oThis){
+
+　　　　if(typeOf this !== 'function'){
+
+　　　　　　throw new TypeError('What is trying to be bound is not callable')
+
+　　　　}
+
+　　　　var aArgs = Array.prototype.slice.call(arguments,1),
+
+　　　　　　fToBind = this,
+
+　　　　　　fNOP = function(){};
+
+　　　　　　fBound = function(){
+
+　　　　　　　　return fToBind.apply(this instanceof fNOP?this:oThis,
+
+　　　　　　　　　　　aArgs.concat(Array.prototype.slice.call(arguments)))
+
+　　　　　　}
+
+　　　　fNOP.prototype = this.prototype;
+
+　　　　fBound.prototype = new fNOP();
+
+　　　　return fBound;
+
+　　}
+
+}
+
