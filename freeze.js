@@ -89,7 +89,8 @@
   //   writable : true//可写
   // })
 
-  // for..in循环 包括继承（原型链继承 而不是改变指向的继承function A(){this.a=1;} function B(){A.call(this);this.b=2;} var b = new B();
+  // for..in循环 包括继承（原型链继承)           
+  //构造函数继承 function A(){this.a=1;} function B(){A.call(this);this.b=2;} var b = new B();
   // 相当于function B(){this.a=1;this.b=2;}）
   // Object.keys方法  不包括继承 es6扩展Object.values和Object.entries
   // JSON.stringify方法 不包括继承
