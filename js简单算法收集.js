@@ -1,4 +1,4 @@
-//1、冒泡排序JavaScript代码实现：   
+#//1、冒泡排序JavaScript代码实现：   
 function bubbleSort(arr) {
     var len = arr.length;
     for (var i = 0; i < len; i++) {
@@ -12,6 +12,38 @@ function bubbleSort(arr) {
     }
     return arr;
 }
+
+#//2、快速排序
+var quickSort = function(arr) {
+
+　　if (arr.length <= 1) { return arr; }
+
+　　var pivotIndex = Math.floor(arr.length / 2); //选中间值为基准
+
+　　var pivot = arr.splice(pivotIndex, 1)[0];
+
+　　var left = [];
+
+　　var right = [];
+
+　　for (var i = 0; i < arr.length; i++){
+
+　　　　if (arr[i] < pivot) {
+
+　　　　　　left.push(arr[i]);
+
+　　　　} else {
+
+　　　　　　right.push(arr[i]);
+
+　　　　}
+
+　　}
+
+　　return quickSort(left).concat([pivot], quickSort(right));
+
+};
+
 
 //2、选择排序JavaScript代码实现：
 //在时间复杂度上表现最稳定的排序算法之一，因为无论什么数据进去都是O(n²)的时间复杂度。。。所以用到它的时候，数据规模越小越好。唯一的好处可能就是不占用额外的内存空间了吧。
