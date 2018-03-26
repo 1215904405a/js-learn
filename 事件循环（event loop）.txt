@@ -12,3 +12,11 @@ JavaScript的单线程，与它的用途有关。作为浏览器脚本语言，J
 任务队列（task queue）：网络请求回调、事件回调、settimeout等  回调方法，等需要时主进程会过来取
 
 参考网址：http://www.ruanyifeng.com/blog/2014/10/event-loop.html
+
+
+注意：
+# 添加消息
+在浏览器里，当一个事件出现且有一个事件监听器被绑定时，消息会被随时添加。如果没有事件监听器，事件会丢失。所以点击一个附带点击事件处理函数的元素会添加一个消息。其它事件亦然。
+调用 setTimeout 函数会在一个时间段过去后在队列中添加一个消息。这个时间段作为函数的第二个参数被传入。如果队列中没有其它消息，消息会被马上处理。但是，如果有其它消息，setTimeout消息必须等待其它消息处理完。因此第二个参数仅仅表示最少的时间 而非确切的时间。
+
+参考：https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/EventLoop
