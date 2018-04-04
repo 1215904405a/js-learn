@@ -120,6 +120,7 @@ console.log(Symbol.keyFor(s2)); // undefined
 
 Symbol.for为 Symbol 值登记的名字，是全局环境的，可以在不同的 iframe 或 service worker 中取到同一个值。
 
+{ let s1 = Symbol.for("foo");  let iframe = document.createElement('iframe'); iframe.width = 200;iframe.height = 200;document.body.append(iframe); console.log(iframe.contentWindow.Symbol.keyFor(s1));  }
 
 8、Symbol静态属性
 
