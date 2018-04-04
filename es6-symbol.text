@@ -1,8 +1,112 @@
 
 1、一种原始基本数据类型，  （undefined、null、布尔值（Boolean）、字符串（String）、数值（Number）、对象（Object） ）；
 
-2、Symbol是函数，不是构造函数，但是不能new Symbol()
+2、防止对象属性名的冲突，保证每个属性的名字都是独一无二的。这就是 ES6 引入Symbol的原因；
 
-3、Symbol是具有内置静态属性和静态方法，有原型，可以添加属性
+3、Symbol是函数，没有继承function，不是构造函数，但是不能new Symbol()
 
-4、本身只能做对象的属性
+4、Symbol是具有内置静态属性和静态方法，有原型，本身可以添加属性，函数执行结果的值不能添加属性，Symbol()结果能继承原型
+Symbol.prototype.wy = 200; || Symbol.wy = 300;
+let a = Symbol();
+a.wy;//200
+
+具体细节代码说明：
+1、symbol类型
+let s = Symbol();
+typeof s
+// "symbol"
+
+2、Symbol函数可以接受一个字符串作为参数，不是字符串会调用toString转换，表示对 Symbol 实例的描述，主要是为了在控制台显示，或者转为字符串时，比较容易区分。
+let s1 = Symbol('foo');
+let s2 = Symbol('bar');
+s1 // Symbol(foo)
+s2 // Symbol(bar)
+s1.toString() // "Symbol(foo)"
+s2.toString() // "Symbol(bar)"
+
+Symbol('foo') === Symbol('foo')//唯一性
+
+3、类型转换
+字符串拼接
+let sym = Symbol('My symbol');
+"your symbol is " + sym
+// TypeError: can't convert symbol to string
+`your symbol is ${sym}`
+// TypeError: can't convert symbol to string
+
+显式转为字符串
+let sym = Symbol('My symbol');
+String(sym) // 'Symbol(My symbol)'
+sym.toString() // 'Symbol(My symbol)'
+
+Symbol 值也可以转为布尔值，但是不能转为数值
+let sym = Symbol();
+Boolean(sym) // true
+!sym  // false
+if (sym) {
+  // ...
+}
+Number(sym) // TypeError
+sym + 2 // TypeError
+
+4、作为属性名的 Symbol
+由于每一个 Symbol 值都是不相等的，这意味着 Symbol 值可以作为标识符，用于对象的属性名，就能保证不会出现同名的属性。这对于一个对象由多个模块构成的情况非常有用，能防止某一个键被不小心改写或覆盖。
+let mySymbol = Symbol();
+// 第一种写法
+let a = {};
+a[mySymbol] = 'Hello!';
+// 第二种写法
+let a = {
+  [mySymbol]: 'Hello!'
+};
+// 第三种写法
+let a = {};
+Object.defineProperty(a, mySymbol, { value: 'Hello!' });
+
+// 以上写法都得到同样结果
+a[mySymbol] // "Hello!"   defineProperty默认属性不可写
+
+5、作为常量使用，确保不受外部影响
+const COLOR_RED    = Symbol();
+const COLOR_GREEN  = Symbol();
+function getComplement(color) {
+  switch (color) {
+    case COLOR_RED:
+      return COLOR_GREEN;
+    case COLOR_GREEN:
+      return COLOR_RED;
+    default:
+      throw new Error('Undefined color');
+    }
+}
+
+6、属性名的遍历
+Symbol 作为属性名，该属性不会出现在for...in、for...of循环中，也不会被Object.keys()、Object.getOwnPropertyNames()、JSON.stringify()返回。
+但是，它也不是私有属性，有一个Object.getOwnPropertySymbols方法，可以获取指定对象的所有 Symbol 属性名。
+Object.getOwnPropertySymbols方法返回一个数组，成员是当前对象的所有用作属性名的 Symbol 值。
+const obj = {a: 1,b:2};
+obj.__proto__ = {c: 3};
+let a = Symbol('a');
+let b = Symbol('b');
+obj[a] = 'Hello';
+obj[b] = 'World';
+
+const symbols = Object.getOwnPropertySymbols(obj);
+const names = Object.getOwnPropertyNames(obj);
+console.log(symbols);
+console.log(names);
+console.log(JSON.stringify(obj));
+for (let i in obj) {
+  console.log(i); 
+}
+Reflect.ownKeys(obj)
+
+所以属性唯一或者不想被普通方式遍历的属性都可以用symbol做为属性
+
+7、
+
+
+
+
+
+
