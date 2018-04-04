@@ -1,1 +1,8 @@
-# Symbol
+
+1、一种原始基本数据类型，  （undefined、null、布尔值（Boolean）、字符串（String）、数值（Number）、对象（Object） ）；
+
+2、Symbol是函数，不是构造函数，但是不能new Symbol()
+
+3、Symbol是具有内置静态属性和静态方法，有原型，可以添加属性
+
+4、本身只能做对象的属性
