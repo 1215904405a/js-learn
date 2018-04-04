@@ -103,7 +103,25 @@ Reflect.ownKeys(obj)
 
 所以属性唯一或者不想被普通方式遍历的属性都可以用symbol做为属性
 
-7、
+7、Symbol的静态方法
+Symbol.for()  不会每次调用就返回一个新的 Symbol 类型的值，生成新的Symbol会登记在全局环境中供搜索
+有时，我们希望重新使用同一个 Symbol 值，Symbol.for方法可以做到这一点。它接受一个字符串作为参数，然后搜索有没有以该参数作为名称的 Symbol 值。如果有，就返回这个 Symbol 值，否则就新建并返回一个以该字符串为名称的 Symbol 值
+Symbol.for("bar") === Symbol.for("bar")
+// true
+Symbol("bar") === Symbol("bar")
+// false
+Symbol()写法没有登记机制，所以每次调用都会返回一个不同的值。  
+
+Symbol.keyFor  返回一个已登记的 Symbol 类型值的key。
+let s1 = Symbol.for("foo");
+console.log(Symbol.keyFor(s1)); // "foo"
+let s2 = Symbol("foo");
+console.log(Symbol.keyFor(s2)); // undefined
+
+Symbol.for为 Symbol 值登记的名字，是全局环境的，可以在不同的 iframe 或 service worker 中取到同一个值。
+
+
+8、Symbol静态属性
 
 
 
