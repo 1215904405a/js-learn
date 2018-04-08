@@ -121,8 +121,92 @@ console.log(Symbol.keyFor(s2)); // undefined
 Symbol.for为 Symbol 值登记的名字，是全局环境的，可以在不同的 iframe 或 service worker 中取到同一个值。
 
 { let s1 = Symbol.for("foo");  let iframe = document.createElement('iframe'); iframe.width = 200;iframe.height = 200;document.body.append(iframe); console.log(iframe.contentWindow.Symbol.keyFor(s1));  }
+iframe = document.createElement('iframe');
+iframe.src = String(window.location);
+document.body.appendChild(iframe);
+iframe.contentWindow.Symbol.for('foo') === Symbol.for('foo')
 
-8、Symbol静态属性
+8、模块的 Singleton 模式（单例模式，只能实例化一次）js模拟
+function A() {
+  this.foo = 'hello';
+}
+if (!global._foo) {
+  global._foo = new A();
+}
+module.exports = global._foo;
+
+const FOO_KEY = Symbol.for('foo')||Symbol('foo');
+function A() {
+  this.foo = 'hello';
+}
+if (!global[FOO_KEY]) {
+  global[FOO_KEY] = new A();
+}
+module.exports = global[FOO_KEY];
+//global[Symbol.for('foo')] = { foo: 'world' };
+
+9、Symbol静态属性，内置的Symbol值（作为对象属性的特殊标识符）
+
+Symbol.hasInstance
+对象的Symbol.hasInstance属性，指向一个内部方法。当其他对象使用instanceof运算符，判断是否为该对象的实例时，会调用这个方法。比如，foo instanceof Foo在语言内部，实际调用的是Foo[Symbol.hasInstance](foo)。
+class Even {
+  static [Symbol.hasInstance](obj) {
+    return Number(obj) % 2 === 0;
+  }
+}
+// 等同于
+const Even = {
+  [Symbol.hasInstance](obj) {
+    return Number(obj) % 2 === 0;
+  }
+};
+1 instanceof Even // false
+2 instanceof Even // true
+12345 instanceof Even // false
+
+Symbol.isConcatSpreadable 定义数组concat时是否有扩展性
+let arr1 = ['c', 'd'];
+['a', 'b'].concat(arr1, 'e') // ['a', 'b', 'c', 'd', 'e']
+arr1[Symbol.isConcatSpreadable] // undefined
+let arr2 = ['c', 'd'];
+arr2[Symbol.isConcatSpreadable] = false;
+['a', 'b'].concat(arr2, 'e') // ['a', 'b', ['c','d'], 'e']
+
+let obj = {length: 2, 0: 'c', 1: 'd'};
+['a', 'b'].concat(obj, 'e') // ['a', 'b', obj, 'e']
+obj[Symbol.isConcatSpreadable] = true;
+['a', 'b'].concat(obj, 'e') // ['a', 'b', 'c', 'd', 'e']
+
+class A1 extends Array {
+  constructor(args) {
+    super(args);
+    this[Symbol.isConcatSpreadable] = true;
+  }
+}
+class A2 extends Array {
+  constructor(args) {
+    super(args);
+  }
+  get [Symbol.isConcatSpreadable] () {
+    return false;
+  }
+}
+let a1 = new A1();
+a1[0] = 3;
+a1[1] = 4;
+let a2 = new A2();
+a2[0] = 5;
+a2[1] = 6;
+[1, 2].concat(a1).concat(a2)
+// [1, 2, 3, 4, [5, 6]]
+
+Symbol.species
+
+
+
+
+
+
 
 
 
