@@ -231,6 +231,50 @@ class MyMatcher {
 }
 'e'.match(new MyMatcher()) // 1
 
+Symbol.replace
+对象的Symbol.replace属性，指向一个方法，当该对象被String.prototype.replace方法调用时，会返回该方法的返回值。
+const x = {};
+x[Symbol.replace] = (...s) => console.log(s);
+'Hello'.replace(x, 'World') // ["Hello", "World"]
+
+Symbol.search
+对象的Symbol.search属性，指向一个方法，当该对象被String.prototype.search方法调用时，会返回该方法的返回值。
+class MySearch {
+  constructor(value) {
+    this.value = value;
+  }
+  [Symbol.search](string) {
+    return string.indexOf(this.value);
+  }
+}
+'foobar'.search(new MySearch('foo')) // 0
+
+Symbol.split
+对象的Symbol.split属性，指向一个方法，当该对象被String.prototype.split方法调用时，会返回该方法的返回值。
+class MySplitter {
+  constructor(value) {
+    this.value = value;
+  }
+  [Symbol.split](string) {
+    let index = string.indexOf(this.value);
+    if (index === -1) {
+      return string;
+    }
+    return [
+      string.substr(0, index),
+      string.substr(index + this.value.length)
+    ];
+  }
+}
+'foobar'.split(new MySplitter('foo'))
+// ['', 'bar']
+'foobar'.split(new MySplitter('bar'))
+// ['foo', '']
+'foobar'.split(new MySplitter('baz'))
+// 'foobar'
+
+
+
 
 
 
