@@ -222,6 +222,15 @@ new T1(r => r()).then(v => v) instanceof T1 // true
 new T2(r => r()).then(v => v) instanceof T2 // false
 
 
+Symbol.match 
+对象的Symbol.match属性，指向一个函数。当执行str.match(MyMatcher)时，如果该属性存在，会调用它，返回该方法的返回值。
+class MyMatcher {
+  [Symbol.match](string) {
+    return 'hello world'.indexOf(string);
+  }
+}
+'e'.match(new MyMatcher()) // 1
+
 
 
 
