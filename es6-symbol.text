@@ -3,7 +3,7 @@
 
 2、防止对象属性名的冲突，保证每个属性的名字都是独一无二的。这就是 ES6 引入Symbol的原因；
 
-3、Symbol是函数，没有继承function，不是构造函数，但是不能new Symbol()
+3、Symbol没有继承function，不是构造函数，不能new Symbol()
 
 4、Symbol是具有内置静态属性和静态方法，有原型，本身可以添加属性，函数执行结果的值不能添加属性，Symbol()结果能继承原型
 Symbol.prototype.wy = 200; || Symbol.wy = 300;
