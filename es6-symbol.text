@@ -5,7 +5,7 @@
 
 3、Symbol不是构造函数，不能new Symbol()
 
-4、Symbol是具有内置静态属性和静态方法，有原型，本身可以添加属性，函数执行结果的值不能添加属性，Symbol()结果能继承原型
+4、Symbol是具有内置静态属性和静态方法，本身可以添加属性，函数执行结果的值不能添加属性，Symbol()结果能继承原型
 Symbol.prototype.wy = 200; || Symbol.wy = 300;
 let a = Symbol();
 a.wy;//200
