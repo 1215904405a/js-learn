@@ -1,3 +1,72 @@
 一、Set
+特点：
+（1）新的数据结构 Set，类似于数组，但是成员的值都是唯一的，没有重复的值。
+数组去重 
+[...new Set([1,2,2,'2',5,5])]
+
+function dedupe(array) {
+  return Array.from(new Set(array));
+}
+dedupe([1, 1, 2, 3])
+
+（2）Set 本身是一个构造函数，用来生成 Set 数据结构，具有iterable 接口。Set 函数可以接受一个数组（或者具有 iterable 接口的其他数据结构）作为参数，用来初始化。
+const s = new Set();
+[2, 3, 5, 4, 5, 2, 2].forEach(x => s.add(x));
+for (let i of s) {
+  console.log(i);
+}
+
+const set = new Set([1, 2, 3, 4, 4]);
+[...set]
+// [1, 2, 3, 4]
+
+const items = new Set([1, 2, 3, 4, 5, 5, 5, 5]);
+items.size // 5
+
+const set = new Set(document.querySelectorAll('div'));
+set.size 
+
+const set = new Set();
+document
+ .querySelectorAll('div')
+ .forEach(div => set.add(div));
+set.size 
+
+（3）Set 加入值的时候，不会发生类型转换，所以5和"5"是两个不同的值，特殊的地方NaN
+let set = new Set();
+let a = NaN;
+let b = NaN;
+set.add(a);
+set.add(b);
+set // Set {NaN}
+
+(4)Set的遍历顺序就是插入顺序。这个特性有时非常有用，比如使用 Set 保存一个回调函数列表，调用时就能保证按照添加顺序调用
+
+
+1、实例属性
+Set.prototype.constructor：构造函数，默认就是Set函数。
+Set.prototype.size：返回Set实例的成员总数。
+new Set([1,2,2,'2',5,5]).size
+
+2、实例的方法( 操作方法 | 遍历方法 )
+add(value)：添加某个值，返回 Set 结构本身。
+let s = new Set();
+s.add(1).add(2).add(2);
+
+delete(value)：删除某个值，返回一个布尔值，表示删除是否成功。
+let s = new Set([1,2,3]);
+s.delete(2);
+
+has(value)：返回一个布尔值，表示该值是否为Set的成员。
+let s = new Set([1,2,3]);
+s.has(4);
+
+clear()：清除所有成员，没有返回值。
+let s = new Set([1,2,3]);
+s.clear();
+console.dir(s);
+
+keys()：返回键名的遍历器
+
 
 二、Map
