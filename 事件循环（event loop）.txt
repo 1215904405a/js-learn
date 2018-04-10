@@ -20,3 +20,4 @@ JavaScript的单线程，与它的用途有关。作为浏览器脚本语言，J
 调用 setTimeout 函数会在一个时间段过去后在队列中添加一个消息。这个时间段作为函数的第二个参数被传入。如果队列中没有其它消息，消息会被马上处理。但是，如果有其它消息，setTimeout消息必须等待其它消息处理完。因此第二个参数仅仅表示最少的时间 而非确切的时间。
 
 参考：https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/EventLoop
+https://github.com/creeperyang/blog/issues/26
