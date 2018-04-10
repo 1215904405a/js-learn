@@ -335,7 +335,7 @@ class Collection {
   }
 }
 let x = new Collection();
-Object.prototype.toString.call(x) // "[object xxx]"
+x.toString();等价Object.prototype.toString.call(x) // "[object xxx]"
 
 Symbol.unscopables
 对象的Symbol.unscopables属性，指向一个对象。该对象指定了使用with关键字时，哪些属性会被with环境排除。
