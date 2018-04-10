@@ -23,7 +23,7 @@ s1 // Symbol(foo)
 s2 // Symbol(bar)
 s1.toString() // "Symbol(foo)"
 s2.toString() // "Symbol(bar)"
-
+ 
 Symbol('foo') === Symbol('foo')//唯一性
 
 3、类型转换
