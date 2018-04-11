@@ -134,4 +134,16 @@ set = new Set(Array.from(set, val => val * 2));
 // set的值是2, 4, 6
 
 
+
+WeakSet
+(1) 成员只能是对象，而不能是其他类型的值
+const ws = new WeakSet();
+ws.add(1)
+// TypeError: Invalid value used in weak set
+ws.add(Symbol())
+// TypeError: invalid value used in weak set
+(2)
+
+
+
 二、Map
