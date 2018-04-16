@@ -136,14 +136,56 @@ set = new Set(Array.from(set, val => val * 2));
 
 
 WeakSet
+
 (1) 成员只能是对象，而不能是其他类型的值
 const ws = new WeakSet();
 ws.add(1)
 // TypeError: Invalid value used in weak set
 ws.add(Symbol())
 // TypeError: invalid value used in weak set
-(2)
 
+(2)WeakSet 中的对象都是弱引用，即垃圾回收机制不考虑 WeakSet 对该对象的引用。WeakSet 适合临时存放一组对象
+WeakSet 的成员是不适合引用的，因为它会随时消失。另外，由于 WeakSet 内部有多少个成员，取决于垃圾回收机制有没有运行，运行前后很可能成员个数是不一样的，而垃圾回收机制何时运行是不可预测的，因此 ES6 规定 WeakSet 不可遍历。
+
+WeakSet 的一个用处，是储存 DOM 节点，而不用担心这些节点从文档移除时，会引发内存泄漏。
+const foos = new WeakSet()
+class Foo {
+  constructor() {
+    foos.add(this)
+  }
+  method () {
+    if (!foos.has(this)) {
+      throw new TypeError('Foo.prototype.method 只能在Foo的实例上调用！');
+    }
+  }
+}
+这里使用 WeakSet 的好处是，foos对实例的引用，不会被计入内存回收机制，所以删除实例的时候，不用考虑foos，也不会出现内存泄漏。
+
+
+(3)WeakSet 是一个构造函数,可以接受一个数组或类似数组的对象(任何具有 Iterable 接口的对象,对象成员也是对象)作为参数
+const a = [[1, 2], [3, 4]];
+const ws = new WeakSet(a);
+
+const b = [3, 4];//参数对象成员也是对象
+const ws = new WeakSet(b);
+// Uncaught TypeError: Invalid value used in weak set(…)
+
+(4)方法
+WeakSet.prototype.add(value)：向 WeakSet 实例添加一个新成员
+WeakSet.prototype.delete(value)：清除 WeakSet 实例的指定成员
+WeakSet.prototype.has(value)：返回一个布尔值，表示某个值是否在 WeakSet 实例之中。
+const ws = new WeakSet();
+const obj = {};
+const foo = {};
+
+ws.add(window);
+ws.add(obj);
+
+ws.has(window); // true
+ws.has(foo);    // false
+
+ws.delete(window);
+ws.has(window);    // false
 
 
 二、Map
