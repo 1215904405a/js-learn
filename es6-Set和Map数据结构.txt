@@ -474,7 +474,63 @@ map.set(Symbol(), 2)
 // TypeError: Invalid value used as weak map key
 map.set(null, 2)
 
-(2)WeakMap的键名所引用的对象都是弱引用，不计入垃圾回收机制。垃圾回收机制不将该引用考虑在内
+(2)WeakMap的键名（不包括键值）所引用的对象都是弱引用，不计入垃圾回收机制。垃圾回收机制不将该引用考虑在内
+const wm = new WeakMap();
+const element = document.getElementById('div');
+wm.set(element, 'some information');
+wm.get(element) // "some information"
+element = null; 
 
+//例子说明 
+node --expose-gc //参数表示允许手动执行垃圾回收机制
+global.gc()//手动执行一次垃圾回收，保证获取的内存使用状态准确
+process.memoryUsage()//// 查看内存占用的初始状态，
+//rss: 进程常驻内存
+//heapTotal：已申请的堆内存
+//heapUsed：已使用的量
+//单位都是字节
+let wm = new WeakMap();
+let key = new Array(5 * 1024 * 1024);
+wm.set(key, 1);
+global.gc();
+process.memoryUsage();
+key = null;
+global.gc();
+process.memoryUsage();
+eakMap的专用场合就是，它的键所对应的对象，可能会在将来消失。WeakMap结构有助于防止内存泄漏
+
+用途：
+DOM 节点作为键名
+let myElement = document.getElementById('logo');
+let myWeakmap = new WeakMap();
+myWeakmap.set(myElement, {timesClicked: 0});
+myElement.addEventListener('click', function() {
+  let logoData = myWeakmap.get(myElement);
+  logoData.timesClicked++;
+}, false);
+
+部署私有属性
+const _counter = new WeakMap();
+const _action = new WeakMap();
+class Countdown {
+  constructor(counter, action) {
+    _counter.set(this, counter);
+    _action.set(this, action);
+  }
+  dec() {
+    let counter = _counter.get(this);
+    if (counter < 1) return;
+    counter--;
+    _counter.set(this, counter);
+    if (counter === 0) {
+      _action.get(this)();
+    }
+  }
+}
+const c = new Countdown(2, () => console.log('DONE'));
+c.dec()
+c.dec()
+
+没有遍历操作和size属性，只有4个操作方法get()、set()、has()、delete()
 
 
