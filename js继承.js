@@ -1,4 +1,5 @@
 //继承包括  原型继承   构造函数继承
+Object.prototype.__proto__=null;
 
 // Shape - 父类(superclass)
 function Shape() {
