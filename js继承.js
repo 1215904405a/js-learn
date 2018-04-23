@@ -1,5 +1,13 @@
 //继承包括  原型继承   构造函数继承
 Object.prototype.__proto__=null;
+Function.__proto__ === Function.prototype;
+Function.prototype.__proto__ === Object.prototype;
+Object.__proto__ === Function.prototype;
+Function是自己的实例
+Object是Function的实例
+
+Object.prototype为根对象
+
 
 // Shape - 父类(superclass)
 function Shape() {
