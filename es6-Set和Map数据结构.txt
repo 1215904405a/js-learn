@@ -32,13 +32,19 @@ document
  .forEach(div => set.add(div));
 set.size 
 
-（3）Set 加入值的时候，不会发生类型转换，所以5和"5"是两个不同的值，特殊的地方NaN
+（3）Set 加入值的时候，不会发生类型转换，所以5和"5"是两个不同的值，特殊的地方NaN,使用的算法叫做“Same-value-zero equality”，它类似于精确相等运算符（===）
 let set = new Set();
 let a = NaN;
 let b = NaN;
 set.add(a);
 set.add(b);
 set // Set {NaN}
+
+let set = new Set();
+set.add({});
+set.size // 1
+set.add({});
+set.size // 2
 
 (4)Set的遍历顺序就是插入顺序。这个特性有时非常有用，比如使用 Set 保存一个回调函数列表，调用时就能保证按照添加顺序调用
 
@@ -95,7 +101,8 @@ let set = new Set();
 set.add(function(){console.log(1)});
 set.add(function(){console.log(3)});
 set.add(function(){console.log(2)});
-set.forEach((value, key) => value());
+set.forEach((value, key) => value());  
+forEach方法还可以有第二个参数，表示绑定处理函数内部的this对象
 
 3、遍历方法的应用
 数组的map和filter方法也可以间接用于 Set
