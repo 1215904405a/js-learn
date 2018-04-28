@@ -1,5 +1,21 @@
 因为bind 方法是EMS5 以后提出的方法，对于老的浏览器，可以使用手写一个bind 方法
 
+//简易bind 重写
+function foo(something) { console.log( this.a, something ); return this.a + something;
+}
+function bind(fn, obj) {
+  return function() {
+    return fn.apply( obj, arguments );
+  }; 
+}
+var obj = { a:2
+};
+var bar = bind( foo, obj );
+var b = bar( 3 ); // 2 3 console.log( b ); // 5
+
+
+
+
 if(!Function.prototype.bind){
 
 　　Function.prototype.bind = function(oThis){
