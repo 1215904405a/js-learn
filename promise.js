@@ -46,4 +46,4 @@ let a = defer();
 a.promise.then(function(value){console.log(value);return 2}).then(function(value){console.log(value)});
 a.resolve(1);
 
-参考： https://juejin.im/entry/599968f6518825244630f809
+参考： https://juejin.im/entry/599968f6518825244630f809  https://github.com/kriskowal/q/tree/v1/design
