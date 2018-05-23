@@ -1,0 +1,36 @@
+AMD和CommonJS 区别：
+ 
+define(function() {
+  var exports = {}; exports.sayHello = function() {
+   alert('Hello from module: ' + module.id); };
+   return exports; 
+});
+1、AMD要用define定义一个模块
+2、内容需要返回来实现导出
+
+CMD
+define(['dep1', 'dep2'], function (dep1, dep2) { return function () {};
+});
+与AMD相比，CMD更接近于Node对CommonJS规范
+ define(function(require, exports, module) {
+  require('')
+ }); 
+ 
+ 
+  兼容多种模块规范       
+ (function (name, definition) {
+  // 检测上 文环境是否为AMD CMD
+  var hasDefine = typeof define === 'function',
+  // 检查上 文环境是否为Node
+  hasExports = typeof module !== 'undefined' && module.exports;
+  if (hasDefine) {
+     define(definition);// AMD环境 CMD环境
+  } else if (hasExports) {
+     module.exports = definition();// 定义为 通Node模块
+  } else {
+     this[name] = definition(); // 将模块的执行结  在window 量中 在  器中this  window对象
+  }
+})('hello', function () {
+  var hello = function () {};
+  return hello; 
+});
