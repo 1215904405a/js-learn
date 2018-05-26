@@ -11,6 +11,39 @@ JavaScript的单线程，与它的用途有关。作为浏览器脚本语言，J
 执行栈：当前主进程
 任务队列（task queue）：网络请求回调、事件回调、settimeout等  回调方法，等需要时主进程会过来取
 
+new Promise(function(resolve, reject) {
+  console.log("promise 执行");
+  resolve('resolve 执行');
+}).then(function(e) {
+  console.log(e);
+});
+
+setTimeout(function() {
+  console.log('setTimeout  执行');
+});
+setImmediate(function() {
+  console.log('setImmediate  执行');
+});
+
+process.nextTick(function() {
+  console.log('nextTick  执行');
+});
+
+console.log('正常执行');
+输出：
+promise 执行
+正常执行
+nextTick  执行
+resolve 执行
+setTimeout  执行
+setImmediate  执行
+
+异步观察者：
+process.nextTick()属于idle观察者 最快执行
+Promise.then 属于I/O观察者  
+setImmediate() 属于check观察者  最后执行
+
+
 参考网址：http://www.ruanyifeng.com/blog/2014/10/event-loop.html
 
 
