@@ -33,3 +33,9 @@ Rectangle.prototype.constructor = Rectangle;
 
 // 因为使用“.prototype =...”后,constructor会改变为“=...”的那个
 // constructor，所以要重新指定.constructor 为自身。
+
+继承方法：  
+   1、subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); 
+   2、if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; 
+   3、class ColorPoint extends Point
+
