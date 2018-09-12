@@ -35,6 +35,19 @@ Rectangle.prototype.constructor = Rectangle;
 // constructor，所以要重新指定.constructor 为自身。
 
 继承方法：  
+    function  Super(){
+        this.colors = ['c','a','b'];
+
+    }
+    Super.prototype.print = function(){
+        console.log(this.colors);
+    };
+    function Sub(){
+        Super.call(this);
+    }
+    Sub.prototype = Object.create(Super.prototype,{ constructor: { value: Sub, enumerable: false} });
+    // Sub.prototype.constructor = Sub;
+
    1、subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); 
    2、if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; 
    3、class ColorPoint extends Point
