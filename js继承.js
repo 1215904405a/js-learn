@@ -37,7 +37,6 @@ Rectangle.prototype.constructor = Rectangle;
 继承方法：  
     function  Super(){
         this.colors = ['c','a','b'];
-
     }
     Super.prototype.print = function(){
         console.log(this.colors);
@@ -46,6 +45,7 @@ Rectangle.prototype.constructor = Rectangle;
         Super.call(this);
     }
     Sub.prototype = Object.create(Super.prototype,{ constructor: { value: Sub, enumerable: false} });
+    // Object.setPrototypeOf(Sub.prototype, Super.prototype);
     // Sub.prototype.constructor = Sub;
 
    1、subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); 
