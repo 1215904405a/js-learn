@@ -1,4 +1,5 @@
-// resolve then
+// resolve then  
+// 参考: https://segmentfault.com/a/1190000009478377
 function Promise(fn) {
     var state = 'pending',
         value = null,
