@@ -1,0 +1,2 @@
+1、Content Security Policy (CSP) 限制脚本所在域名，才能执行
+参考地址：https://www.cnblogs.com/Hwangzhiyoung/p/9146740.html
