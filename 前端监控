@@ -1,0 +1,36 @@
+前端错误监控原理与实战
+
+一、前端错误的分类；
+包括两种：
+　　1、即时运行错误：也就是代码错误；
+　　2、资源加载错误：比如图片加载失败、JS加载失败、CSS加载失败等；
+
+二、错误的捕获方式
+  即时运行错误的捕获方式：
+　　1、try...catch
+　　2、window.onerror：只能捕获即时运行错误，不能捕获资源加载错误(原理：资源加载错误，并不会向上冒泡，object.onerror捕获后就会终止，所以window.onerror并不能捕获资源加载错误)；
+
+资源加载错误的捕获方式：
+　　1、object.onerror：img标签、script标签都可以添加onerror事件，用来捕获资源加载错误；
+　　2、performance.getEntries：可以获取所有已加载资源的加载时间，通过这种方式，可以间接的拿到没有加载的资源错误。
+　　　　举例：
+　　　　浏览器打开一个网站，在Console控制台下，输入：performance.getEntries().forEach(function(item){console.log(item.name)})，显示出来的资源就是已经成功加载的；
+
+　　　　再输入document.getElementsByTagName('img')，就会显示出所有的img集合，这是所有需要加载的图片的集合；
+
+　　　　document.getElementsByTagName('img')获取的资源数组减去通过performance.getEntries()获取的资源数组，剩下的就是没有成功加载的，这种方式可以间接的捕获到资源加载错误。
+    3、Error事件捕获
+　　资源加载错误，虽然会阻止冒泡，但是不会阻止捕获。
+    window.addEventListener('error',function(){},true);
+    
+    延伸问题：跨域js运行错误可以捕获吗？错误提示是什么？应该怎么处理呢？
+　　跨域js运行错误也是可以捕获到的，但是拿不到具体的信息，比如：出错行号、出错列号，错误详情等，这种问题应该怎么处理呢？
+　　分两步：
+　　1.在script标签上增加crossorigin属性；
+　　2.设置js资源响应头Access-Control-Allow-Origin:*；
+  
+  三、上报错误的基本原理
+　　1.采用Ajax通信的方式上报；
+　　2.利用Image对象上报；(推荐的方式)
+　　如何利用Image对象上报呢？
+　　只需要动态创建一个Image对象即可
