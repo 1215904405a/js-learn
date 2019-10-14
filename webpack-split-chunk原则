@@ -1,0 +1,6 @@
+webpack will automatically split chunks based on these conditions:
+
+New chunk can be shared OR modules are from the node_modules folder（共享 or node_modules）
+New chunk would be bigger than 30kb (before min+gz)（大于30kb）
+Maximum number of parallel requests when loading chunks on demand would be lower or equal to 5（页面加载文件数少于5）
+Maximum number of parallel requests at initial page load would be lower or equal to 3
