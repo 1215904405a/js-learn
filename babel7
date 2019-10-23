@@ -1,0 +1,21 @@
+
+参考：https://www.jianshu.com/p/cbd48919a0cc
+https://babeljs.io/docs/en/babel-preset-env#corejs
+
+{
+    "presets": [
+        ["@babel/preset-env", {
+            "useBuiltIns": "usage", // 用啥加载啥
+            "targets": "> 1%, last 2 versions, not ie <= 8",
+            "corejs": "3.3" // 替换polyfill
+        }]
+    ],
+    "plugins": [
+        // Promise、Map等不污染全局   多文件，语法方法提取，减少代码量
+        ["@babel/plugin-transform-runtime", {
+            "absoluteRuntime": false,
+            "corejs": 3, 
+            "helpers": true 
+          }]
+    ]
+}
