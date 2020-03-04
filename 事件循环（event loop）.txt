@@ -5,6 +5,8 @@ setTimeout, setInterval, setImmediate, requestAnimationFrame, I/O, UI rendering.
 微任务：
 而微任务是更小的任务。微任务更新应用程序的状态，但必须在浏览器任务继续执行其他任务之前执行，浏览器任务包括重新渲染页面的UI。微任务的案例包括promise回调函数、DOM发生变化等。微任务需要尽可能快地、通过异步方式执行，同时不能产生全新的微任务。微任务使得我们能够在重新渲染UI之前执行指定的行为，避免不必要的UI重绘，UI重绘会使应用程序的状态不连续。
 process.nextTick, Promises, Object.observe, MutationObserver。
+
+async/await本质上还是基于Promise的一些封装，而Promise是属于微任务的一种。所以在使用await关键字与Promise.then效果类似：
 参考： https://juejin.im/entry/58d4df3b5c497d0057eb99ff
 https://html.spec.whatwg.org/multipage/webappapis.html#event-loops
 
