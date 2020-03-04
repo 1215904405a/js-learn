@@ -5,16 +5,8 @@ setTimeout, setInterval, setImmediate, requestAnimationFrame, I/O, UI rendering.
 微任务：
 而微任务是更小的任务。微任务更新应用程序的状态，但必须在浏览器任务继续执行其他任务之前执行，浏览器任务包括重新渲染页面的UI。微任务的案例包括promise回调函数、DOM发生变化等。微任务需要尽可能快地、通过异步方式执行，同时不能产生全新的微任务。微任务使得我们能够在重新渲染UI之前执行指定的行为，避免不必要的UI重绘，UI重绘会使应用程序的状态不连续。
 process.nextTick, Promises, Object.observe, MutationObserver。
-
-历史原因：
-JavaScript的单线程，与它的用途有关。作为浏览器脚本语言，JavaScript的主要用途是与用户互动，
-以及操作DOM。这决定了它只能是单线程，否则会带来很复杂的同步问题。比如，假定JavaScript同时有两个线程，
-一个线程在某个DOM节点上添加内容，另一个线程删除了这个节点，这时浏览器应该以哪个线程为准？
-所以，为了避免复杂性，从一诞生，JavaScript就是单线程，这已经成了这门语言的核心特征，将来也不会改变。
-为了利用多核CPU的计算能力，HTML5提出Web Worker标准，允许JavaScript脚本创建多个线程，但是子线程完全受主线程控制，
-且不得操作DOM。所以，这个新标准并没有改变JavaScript单线程的本质。
-
-注意：是在执行阶段不是编译阶段，当前循环的js是同步，没有执行完，不会进行下一轮。
+参考： https://juejin.im/entry/58d4df3b5c497d0057eb99ff
+https://html.spec.whatwg.org/multipage/webappapis.html#event-loops
 
 执行栈：当前主进程
 任务队列（task queue）：网络请求回调、事件回调、settimeout等  回调方法，等需要时主进程会过来取
@@ -45,14 +37,6 @@ nextTick  执行
 resolve 执行
 setTimeout  执行
 setImmediate  执行
-
-异步观察者：
-process.nextTick()属于idle观察者 最快执行
-Promise.then 属于I/O观察者  
-setImmediate() 属于check观察者  最后执行
-
-
-参考网址：http://www.ruanyifeng.com/blog/2014/10/event-loop.html
 
 
 注意：
