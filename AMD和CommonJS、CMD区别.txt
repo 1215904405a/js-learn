@@ -17,7 +17,7 @@ define(['dep1', 'dep2'], function (dep1, dep2) { return function () {};
  }); 
  
  
-  UMD兼容多种模块规范       
+  UMD 通用模块定义规范（Universal Module Definition）兼容多种模块规范       
  (function (name, definition) {
   // 检测上 文环境是否为AMD CMD
   var hasDefine = typeof define === 'function',
