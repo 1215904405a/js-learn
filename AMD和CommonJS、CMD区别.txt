@@ -17,7 +17,8 @@ define(['dep1', 'dep2'], function (dep1, dep2) { return function () {};
  }); 
  
  
-  UMD 通用模块定义规范（Universal Module Definition）兼容多种模块规范       
+  UMD 通用模块定义规范（Universal Module Definition）兼容多种模块规范  
+  严格上说，umd不能算是一种模块规范，因为它没有模块定义和调用，这是AMD和CommonJS（服务端模块化规范)的结合体，保证模块可以被amd和commonjs调用
  (function (name, definition) {
   // 检测上 文环境是否为AMD CMD
   var hasDefine = typeof define === 'function',
