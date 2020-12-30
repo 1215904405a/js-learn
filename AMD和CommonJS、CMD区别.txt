@@ -11,7 +11,7 @@ define(function() {
 CMD（和AMD的区别参考玉伯的解释https://www.zhihu.com/question/20351507）
 define(['dep1', 'dep2'], function (dep1, dep2) { return function () {};
 });
-与AMD相比，CMD更接近于Node对CommonJS规范
+与AMD相比，CMD更接近于Node对CommonJS规范，CMD需要在require引入
  define(function(require, exports, module) {
   require('')
  }); 
