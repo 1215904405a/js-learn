@@ -35,7 +35,7 @@ Object.prototype.clone = function() { // 原型
      }
      throw new Error("Unable to clone obj! Its type isn't supported.");
 }
-```
+
 function clone(obj) { // 对象
      // Handle the 3 simple types, and null or undefined or function
      if (null == obj || "object" != typeof obj) return obj;
@@ -111,3 +111,4 @@ const arr5 = Array.from(arr);
 console.log(arr5);
 //5
 var clone = JSON.parse(JSON.stringify(arr));
+```
