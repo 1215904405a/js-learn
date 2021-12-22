@@ -1,3 +1,16 @@
+## 1.JSON转换
+var targetObj = JSON.parse(JSON.stringify(copyObj))
+let arr4 = JSON.parse(JSON.stringify(arr))
+缺点：
+
+（1）如果对象里有函数,函数无法被拷贝下来
+
+（2）无法拷贝copyObj对象原型链上的属性和方法
+
+（3）当数据的层次很深，会栈溢出
+
+
+
 Object.prototype.clone = function() { // 原型
      // Handle null or undefined or function
      if (null == this || "object" != typeof this)
