@@ -10,7 +10,7 @@ let arr4 = JSON.parse(JSON.stringify(arr))
 （3）当数据的层次很深，会栈溢出
 
 
-
+```
 Object.prototype.clone = function() { // 原型
      // Handle null or undefined or function
      if (null == this || "object" != typeof this)
@@ -35,7 +35,7 @@ Object.prototype.clone = function() { // 原型
      }
      throw new Error("Unable to clone obj! Its type isn't supported.");
 }
-
+```
 function clone(obj) { // 对象
      // Handle the 3 simple types, and null or undefined or function
      if (null == obj || "object" != typeof obj) return obj;
