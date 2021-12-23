@@ -9,6 +9,14 @@ let arr4 = JSON.parse(JSON.stringify(arr))
 
 （3）当数据的层次很深，会栈溢出
 
+## 2、函数递归
+
+缺点：
+
+（1）无法保持引用
+
+（2）当数据的层次很深，会栈溢出
+
 
 ```
 Object.prototype.clone = function() { // 原型
@@ -84,6 +92,54 @@ function clone(obj){
 }
 
 Object.getOwnPropertyNames(Object);//获取不可枚举属性
+
+
+## 3、防栈溢出函数
+```
+function cloneLoop(x) {
+    const root = {};
+
+    // 栈
+    const loopList = [
+        {
+            parent: root,
+            key: undefined,
+            data: x,
+        }
+    ];
+
+    while(loopList.length) {
+        // 深度优先
+        const node = loopList.pop();
+        const parent = node.parent;
+        const key = node.key;
+        const data = node.data;
+
+        // 初始化赋值目标，key为undefined则拷贝到父元素，否则拷贝到子元素
+        let res = parent;
+        if (typeof key !== 'undefined') {
+            res = parent[key] = {};
+        }
+
+        for(let k in data) {
+            if (data.hasOwnProperty(k)) {
+                if (typeof data[k] === 'object') {
+                    // 下一次循环
+                    loopList.push({
+                        parent: res,
+                        key: k,
+                        data: data[k],
+                    });
+                } else {
+                    res[k] = data[k];
+                }
+            }
+        }
+    }
+
+    return root;
+}
+```
 
 
 //数组clone
