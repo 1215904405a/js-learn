@@ -70,6 +70,24 @@ function clone(origin) {  //克隆
   let originProto = Object.getPrototypeOf(origin);
   return Object.assign(Object.create(originProto), origin);
 }
+// 拷贝原型
+function copyObject(orig) {
+    var copy = Object.create(Object.getPrototypeOf(orig));
+    copyOwnPropertiesFrom(copy, orig);
+    return copy;
+  }
+
+
+  function copyOwnPropertiesFrom(target, source) {
+    Object
+    .getOwnPropertyNames(source)
+    .forEach(function (propKey) {
+      var desc = Object.getOwnPropertyDescriptor(source, propKey);
+      Object.defineProperty(target, propKey, desc);
+    });
+    return target;
+  }
+
 
 function clone(obj){
   var buf;
@@ -147,7 +165,7 @@ function cloneLoop(x) {
 ```
 
 ```
-//数组clone
+## 4、数组clone
 let arr = [{
   'obj1': 1
 }, {
