@@ -164,8 +164,8 @@ function cloneLoop(x) {
 }
 ```
 
-```
 ## 4、数组clone
+```
 let arr = [{
   'obj1': 1
 }, {
