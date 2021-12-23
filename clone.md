@@ -95,6 +95,11 @@ Object.getOwnPropertyNames(Object);//获取不可枚举属性
 ```
 
 ## 3、防栈溢出函数
+优点：
+
+（1）不会栈溢出
+
+（2）支持很多层级的数据
 ```
 function cloneLoop(x) {
     const root = {};
