@@ -92,7 +92,7 @@ function clone(obj){
 }
 
 Object.getOwnPropertyNames(Object);//获取不可枚举属性
-
+```
 
 ## 3、防栈溢出函数
 ```
@@ -141,7 +141,7 @@ function cloneLoop(x) {
 }
 ```
 
-
+```
 //数组clone
 let arr = [{
   'obj1': 1
