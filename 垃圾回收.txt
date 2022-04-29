@@ -1,0 +1,4 @@
+1、引用计数垃圾收集（老的）
+2、标记-清除算法
+
+https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Memory_Management#%E6%A0%87%E8%AE%B0-%E6%B8%85%E9%99%A4%E7%AE%97%E6%B3%95
