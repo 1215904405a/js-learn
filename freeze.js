@@ -100,7 +100,7 @@
   //     "a":{
   //         value : 1,
   //         configurable : false,//不可配置
-  //         enumerable : true,//可枚举
+  //         enumerable : true,//可枚举  是false for..in不能遍历
   //         writable : true//可写
   //     }
   // });
