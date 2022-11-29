@@ -21,3 +21,6 @@ function throttled(fn, delay) {
         }
     }
 }
+
+v8相关：
+https://blackglory.me/notes/v8
