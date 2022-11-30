@@ -1,4 +1,4 @@
-优化相关
+## 优化相关
 
 https://juejin.cn/post/6844903918804172814
 
@@ -22,5 +22,48 @@ function throttled(fn, delay) {
     }
 }
 
-v8相关：
+### v8相关：
 https://blackglory.me/notes/v8
+
+### 性能测试：
+const array = new Array(1000).fill('*');
+1、const t0 = performance.now();
+for (let i = 0; i < array.length; i++) 
+{
+  // some code
+}
+const t1 = performance.now();
+console.log(t1 - t0, 'milliseconds');
+
+2、console.time('test');
+for (let i = 0; i < array.length; i++) {
+  // some code
+}
+console.timeEnd('test');
+3、测试for 和 forEach的性能
+function testForEach(x) {
+  console.time('test-forEach');
+  const res = [];
+  x.forEach((value, index) => {
+    res.push(value / 1.2 * 0.1);
+  });
+
+  console.timeEnd('test-forEach')
+  return res;
+}
+
+function testFor(x) {
+  console.time('test-for');
+  const res = [];
+  for (let i = 0; i < x.length; i ++) {
+    res.push(x[i] / 1.2 * 0.1);
+  }
+
+  console.timeEnd('test-for')
+  return res;
+}
+const x = new Array(100000).fill(Math.random());
+testForEach(x);
+testFor(x);
+参考: https://juejin.cn/post/6844904112023142407
+
