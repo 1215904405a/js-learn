@@ -26,8 +26,9 @@ function throttled(fn, delay) {
 https://blackglory.me/notes/v8
 
 ### 性能测试：
+#### 1、
 const array = new Array(1000).fill('*');
-1、const t0 = performance.now();
+const t0 = performance.now();
 for (let i = 0; i < array.length; i++) 
 {
   // some code
@@ -35,12 +36,13 @@ for (let i = 0; i < array.length; i++)
 const t1 = performance.now();
 console.log(t1 - t0, 'milliseconds');
 
-2、console.time('test');
+#### 2、
+console.time('test');
 for (let i = 0; i < array.length; i++) {
   // some code
 }
 console.timeEnd('test');
-3、测试for 和 forEach的性能
+#### 3、测试for 和 forEach的性能
 function testForEach(x) {
   console.time('test-forEach');
   const res = [];
