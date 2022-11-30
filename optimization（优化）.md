@@ -4,6 +4,7 @@ https://juejin.cn/post/6844903918804172814
 
 https://vue3js.cn/interview/JavaScript/debounce_throttle.html
 
+```
 function throttled(fn, delay) {
     let timer = null
     let starttime = Date.now()
@@ -21,12 +22,14 @@ function throttled(fn, delay) {
         }
     }
 }
+```
 
 ### v8相关：
 https://blackglory.me/notes/v8
 
 ### 性能测试：
 #### 1、
+```
 const array = new Array(1000).fill('*');
 const t0 = performance.now();
 for (let i = 0; i < array.length; i++) 
@@ -35,14 +38,17 @@ for (let i = 0; i < array.length; i++)
 }
 const t1 = performance.now();
 console.log(t1 - t0, 'milliseconds');
-
+```
 #### 2、
+```
 console.time('test');
 for (let i = 0; i < array.length; i++) {
   // some code
 }
 console.timeEnd('test');
+```
 #### 3、测试for 和 forEach的性能
+```
 function testForEach(x) {
   console.time('test-forEach');
   const res = [];
@@ -67,5 +73,6 @@ function testFor(x) {
 const x = new Array(100000).fill(Math.random());
 testForEach(x);
 testFor(x);
+```
 参考: https://juejin.cn/post/6844904112023142407
 
