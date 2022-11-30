@@ -1,0 +1,1 @@
+# Web Worker 的作用，就是为 JavaScript 创造多线程环境，允许主线程创建 Worker 线程
